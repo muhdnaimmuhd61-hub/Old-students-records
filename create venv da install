@@ -1,0 +1,5 @@
+python -m venv venv
+# activate
+source venv/bin/activate   # mac/linux
+# Windows: venv\Scripts\activate
+pip install flask werkzeug
