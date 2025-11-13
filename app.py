@@ -7,7 +7,11 @@ from werkzeug.security import generate_password_hash, check_password_hash
 app = Flask(__name__)
 app.secret_key = 'supersecretkey'
 UPLOAD_FOLDER = 'uploads'
-
+# Clean and recreate uploads folder safely
+if os.path.exists('uploads') and not os.path.isdir('uploads'):
+    os.remove('uploads')  # Delete file blocking the folder name
+if not os.path.isdir('uploads'):
+    os.makedirs('uploads')
 try:
     os.makedirs(UPLOAD_FOLDER, exist_ok=True)
 except FileExistsError:
