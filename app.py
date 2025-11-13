@@ -7,8 +7,12 @@ from werkzeug.security import generate_password_hash, check_password_hash
 app = Flask(__name__)
 app.secret_key = 'supersecretkey'
 UPLOAD_FOLDER = 'uploads'
-if not os.path.isdir(UPLOAD_FOLDER):
-    os.makedirs(UPLOAD_FOLDER)
+
+try:
+    os.makedirs(UPLOAD_FOLDER, exist_ok=True)
+except FileExistsError:
+    pass  # Ignore if folder already exists
+
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 
 DB_NAME = 'alumni.db'
